@@ -1,0 +1,15 @@
+
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+# Selenium WebDriver binaries
+chromedriver
+geckodriver
+msedgedriver
+operadriver
+.vscode/
