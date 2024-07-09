@@ -13,3 +13,4 @@ geckodriver
 msedgedriver
 operadriver
 .vscode/
+__pycache__
