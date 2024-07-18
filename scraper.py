@@ -21,8 +21,8 @@ wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#__next > main
 #scroll_to_bottom(driver)
 for i in range(15):
     
-    elements = driver.find_elements(By.CSS_SELECTOR, '#__next > main > div > div > div.Box.clAhaB.Col.bzYVms > div > div.Box.cORqut')
-
+    #elements = driver.find_elements(By.CSS_SELECTOR, '#__next > main > div > div > div.Box.clAhaB.Col.bzYVms > div > div.Box.cORqut')
+    elements = driver.find_elements(By.XPATH, '//*[@id="__next"]/main/div/div/div[1]/div/div[2]/div[6]')
     for element in elements:
         print(element.text)
         if element.text in lst: 
