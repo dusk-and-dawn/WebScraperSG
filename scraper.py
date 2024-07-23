@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from collections import defaultdict
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from page_navigation import scroll_to_bottom, scroll_by_pixels
+from page_navigation import scroll_by_pixels
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Chrome(options=options)

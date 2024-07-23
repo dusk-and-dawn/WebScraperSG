@@ -5,39 +5,38 @@ from selenium.webdriver.common.keys import Keys
 from collections import defaultdict
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from page_navigation import scroll_to_bottom, scroll_by_pixels
-options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-driver = webdriver.Chrome(options=options)
-x = driver.get('https://www.sofascore.com/tennis/rankings/wta')
-time.sleep(5)
+from page_navigation import open_website, setup_driver, scroll_by_pixels
 
-rank_element = driver.find_elements(By.CSS_SELECTOR, 'span.Text.gdSPOf')
-names_elements = driver.find_elements(By.CSS_SELECTOR, 'bdi.Text.ietnEf')
+def scrape_data(driver, player_list):
+    elements = driver.find_elements(By.CLASS_NAME, 'hLDjoK')
+    for element in elements:
+        rank = element.find_element(By.CSS_SELECTOR, 'span.Text.gdSPOf').text.rstrip('.')
+        name = element.find_element(By.CSS_SELECTOR, 'bdi.Text.ietnEf').text
+        country = element.find_element(By.CSS_SELECTOR, 'span.Text.erwlKT').text
+        points = element.find_element(By.CSS_SELECTOR, 'span.Text.gYQbnv').text
+        if rank == '' or name == '' or country == '' or points == '':
+            continue
+        else:
+            if [rank, name, country, points] not in player_list:
+                player_list.append([rank, name, country, points])
 
-# ranks = []
-# for rank in rank_element:
-#     num = rank.text
-#     if num:
-#         ranks.append(num)
+def main(url):
+    driver = setup_driver()
+    open_website(driver, url)
+    player_list = []
 
-names = []
-for name in names_elements:
-    x = name.text
-    if x:
-        names.append(x)
+    # Perform smooth scrolling and scraping
+    end_of_content_reached = False
+    while not end_of_content_reached:
+        scrape_data(driver, player_list)
+        scroll_by_pixels(driver, 500)
+        if len(player_list) == 500:
+            end_of_content_reached = True
+        print(len(player_list))
+    driver.quit()
+    print(player_list)
 
-stop = False
-while stop==False:
-    ranks = []
-    for rank in rank_element:
-        num = rank.text
-        if num:
-            ranks.append(num)
-    if ranks[-1] == '500':
-        stop = True
-    else:
-        scroll_by_pixels(driver, 700)
-    
+main('https://www.sofascore.com/tennis/rankings/wta')
 
-print(ranks)
+
+
