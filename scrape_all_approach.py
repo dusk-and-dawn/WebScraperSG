@@ -1,4 +1,4 @@
-import time
+import time, json
 from selenium import webdriver  
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -29,12 +29,16 @@ def main(url):
     end_of_content_reached = False
     while not end_of_content_reached:
         scrape_data(driver, player_list)
-        scroll_by_pixels(driver, 500)
+        scroll_by_pixels(driver, 700)
         if len(player_list) == 500:
             end_of_content_reached = True
         print(len(player_list))
     driver.quit()
     print(player_list)
+
+    with open('wta500.json', 'w', -1, 'utf-8') as file:
+        json.dump(player_list, file)
+    
 
 main('https://www.sofascore.com/tennis/rankings/wta')
 
