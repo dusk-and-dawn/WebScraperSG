@@ -83,3 +83,18 @@ for i in range(20):
         print(f'this country is in the top 20 when looking at top 500 but not if one only looks at the top 100: {countries[i]}')
     if countries100[i] not in countries[:20]:
         print(f'this country is in the top 20 when looking at top 100 but not if one only looks at the top 500: {countries100[i]}')
+
+# comparison bar chart 
+comparison = {'top500': [i for i in appearances[:20]],
+              'top100': [i for i in appearances100[:20]]}
+indexprep = []
+for i in range(20):
+    x = str(countries[i]) + ' | ' + str(countries100[i])
+    indexprep.append(x)
+print(len(indexprep))
+comp_df = pd.DataFrame(comparison, columns=['top500', 'top100'], index=indexprep)
+
+comp_df.plot.barh(figsize=(20, 10), title='comparison of top 20 countries based on ranks in top 500 and top 100 WTA').invert_yaxis()
+
+
+plt.show()
