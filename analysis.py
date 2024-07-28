@@ -14,7 +14,7 @@ Make sure to run the scraper first, as this requires a json file of the name wta
 '''
 #load data 
 '''
----old way to load data from a single json file 
+#---old way to load data from a single json file 
 with open('wta500.json', 'r', encoding='utf-8') as file:
     allList = json.load(file)
 

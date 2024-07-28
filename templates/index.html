@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" >
+    <title>A Data Story</title>
+</head>
+    <body>
+    <section class="section">
+        <h1 class="title">
+            A Data Story ... About Tennis!
+        </h1>
+        <h2 class = 'subtitle'>
+            This story is all about exploring tennis by looking at data first.  
+        </h2>
+    </section>
+    <section class="section">
+        <div class= "box">
+            The first story we have to tell is about countries strength in the WTA over the years.
+            You can check it out by pressing the button below. 
+        </div> 
+        <a class="button" href="{{ url_for('WTAcountries')}}">The WTA around the globe</a>
+    </section>
+    <section class="section">
+        <div class = "container">
+            <img src="{{ url_for('return_graph', key='comp_top20_100_5002024-07-28')}}" alt="top 20 countries represented in WTA 500">
+        </div>
+    </section>
+    </body>
+</html>

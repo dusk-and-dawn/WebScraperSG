@@ -51,7 +51,8 @@ def return_graph(key):
         plt.imshow(img)
         plt.show()
 
-
+def get_client():
+    return db
 
 '''
 Some useful test print statements for testing database connectivity
