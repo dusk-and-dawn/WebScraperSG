@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('TkAgg') 
 import matplotlib.pyplot as plt
+from db import send_graph_to_db
 
 
 '''
@@ -20,9 +21,6 @@ df = pd.DataFrame(allList, columns=columns)
 df['Rank'] = pd.to_numeric(df['Rank'])
 df['Points'] = pd.to_numeric(df['Points'])
 
-#print(df.head())  
-#print(df['Country'].head())
-
 #preparation for grafics
 hm = {}
 for i in df['Country']:
@@ -32,14 +30,11 @@ for i in df['Country']:
     else:
         hm[i] = 1
 
-#print(hm) 
 countries_ranked = sorted(hm.items(), key=lambda x:x[1])[::-1]
-#print(countries_ranked)
 countries = [i[0] for i in countries_ranked]
 appearances = [i[1] for i in countries_ranked]
-#print(countries, appearances)
 
-#creating the grafic
+#creating the first grafic
 
 fig, ax = plt.subplots(figsize=(20,10))
 ax.barh(countries[:20], appearances[:20])
@@ -50,14 +45,16 @@ ax.xaxis.set_ticks_position('none')
 ax.yaxis.set_ticks_position('none')
 ax.xaxis.set_tick_params(pad=10)
 ax.yaxis.set_tick_params(pad=10)
+
+# saving our work and displaying it
+
+send_graph_to_db('top20_wta500_countries_ranked_by_appearance')
 plt.savefig('top20_wta500_countries_ranked_by_appearance')
 plt.show()
 
 
 # Second Chapter countries representation in Top 100 
 hm100 = {}
-
-
 for index, country in enumerate(df['Country']):
     if index < 101:
         if country in hm100.keys():
@@ -66,7 +63,6 @@ for index, country in enumerate(df['Country']):
             hm100[country] = 1
 
 countries100_ranked = sorted(hm100.items(), key=lambda x:x[1])[::-1]
-
 countries100 = [i[0] for i in countries100_ranked]
 appearances100 = [i[1] for i in countries100_ranked]
 
@@ -75,6 +71,10 @@ ax100.barh(countries100[:20], appearances100[:20])
 ax100.invert_yaxis() 
 ax100.set_title('countries representation in the WTA rankings top 100',
              loc='left', )
+
+# saving our work and displaying it
+
+send_graph_to_db('top20_wta100_countries_ranked_by_appearance')
 plt.savefig('top20_wta100_countries_ranked_by_appearance')
 plt.show()
 
@@ -98,5 +98,7 @@ comp_df = pd.DataFrame(comparison, columns=['top500', 'top100'], index=indexprep
 
 comp_df.plot.barh(figsize=(20, 10), title='comparison of top 20 countries based on ranks in top 500 and top 100 WTA').invert_yaxis()
 
+# saving our work and displaying it
 
+send_graph_to_db('comp_top20_100_500')
 plt.show()

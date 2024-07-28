@@ -1,16 +1,22 @@
 from pymongo import MongoClient
 from datetime import datetime
-client = MongoClient('localhost', 27017)
+from io import  BytesIO
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 # wtaMasterList2024-01-07/27/24
 
-db = client.tennisdb
+'''
+The basic databank setup
+'''
 
+client = MongoClient('localhost', 27017)
+db = client.tennisdb
 test = db.test
 tennis = db.tennis 
 
-# test.insert_one({'name': 'Testboy Mr Dungbeetle'})
-# for person in test.find():
-#     print(person)
+'''
+The databank calls
+'''
 
 def send_to_db(key, content='test'):
     name = key + datetime.today().strftime('%Y-%m-%d') 
@@ -18,6 +24,42 @@ def send_to_db(key, content='test'):
 
 def get_from_db(key): 
     return [t for t in tennis.find({"name" : key} )]
+
+def send_graph_to_db(key):
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_binary = buffer.getvalue()
+    buffer.close()
+    document = {
+        'name' : key + datetime.today().strftime('%Y-%m-%d'), 
+        'img' : image_binary
+    }
+    tennis.insert_one(document)
+
+def return_graph(key):
+    document = tennis.find_one({'name' : key})
+    if document is None:
+        return print('no doc found')
+    else:
+        print(document)
+        image_binary = document['img']
+        buffer = BytesIO(image_binary)
+        buffer.seek(0)
+        img = mpimg.imread(buffer, format='png')
+        buffer.close()
+        plt.imshow(img)
+        plt.show()
+
+
+
+'''
+Some useful test print statements for testing database connectivity
+'''
+# return_graph('top20_wta500_countries_ranked_by_appearance2024-07-28')
+# test.insert_one({'name': 'Testboy Mr Dungbeetle'})
+# for person in test.find():
+#     print(person)
 
 #print(get_from_db('wtaMasterList2024-07-28'))
 

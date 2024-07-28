@@ -22,7 +22,7 @@ def scrape_data(driver, player_list):
                 player_list.append([rank, name, country, points])
 
 def main(url):
-    driver = setup_driver()
+    driver = setup_driver()|
     open_website(driver, url)
     player_list = []
 
