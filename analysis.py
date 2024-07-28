@@ -2,8 +2,10 @@
 
 import json
 import pandas as pd 
+import matplotlib
+matplotlib.use('TkAgg') 
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 
 '''
 ATTENTION! 
@@ -91,7 +93,7 @@ indexprep = []
 for i in range(20):
     x = str(countries[i]) + ' | ' + str(countries100[i])
     indexprep.append(x)
-print(len(indexprep))
+
 comp_df = pd.DataFrame(comparison, columns=['top500', 'top100'], index=indexprep)
 
 comp_df.plot.barh(figsize=(20, 10), title='comparison of top 20 countries based on ranks in top 500 and top 100 WTA').invert_yaxis()

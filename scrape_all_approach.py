@@ -1,4 +1,4 @@
-import time, json
+import time, json, datetime
 from selenium import webdriver  
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -6,6 +6,7 @@ from collections import defaultdict
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from page_navigation import open_website, setup_driver, scroll_by_pixels
+from db import send_to_db
 
 def scrape_data(driver, player_list):
     elements = driver.find_elements(By.CLASS_NAME, 'hLDjoK')
@@ -39,6 +40,7 @@ def main(url):
     with open('wta500.json', 'w', -1, 'utf-8') as file:
         json.dump(player_list, file)
     
+    send_to_db('wtaMasterList', player_list)
 
 main('https://www.sofascore.com/tennis/rankings/wta')
 
