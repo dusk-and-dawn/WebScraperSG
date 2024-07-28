@@ -3,7 +3,6 @@ from datetime import datetime
 from io import  BytesIO
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-# wtaMasterList2024-01-07/27/24
 
 '''
 The basic databank setup
@@ -23,7 +22,8 @@ def send_to_db(key, content='test'):
     tennis.insert_one({'name':name, 'content':content})
 
 def get_from_db(key): 
-    return [t for t in tennis.find({"name" : key} )]
+    #return [t for t in tennis.find({"name" : key} )]
+    return tennis.find_one({'name':key})
 
 def send_graph_to_db(key):
     buffer = BytesIO()

@@ -5,17 +5,28 @@ import pandas as pd
 import matplotlib
 matplotlib.use('TkAgg') 
 import matplotlib.pyplot as plt
-from db import send_graph_to_db
-
+from db import send_graph_to_db, get_from_db
+from datetime import datetime
 
 '''
 ATTENTION! 
 Make sure to run the scraper first, as this requires a json file of the name wta500.json in the active directory, which you get from running the scraper. 
 '''
 #load data 
+'''
+---old way to load data from a single json file 
 with open('wta500.json', 'r', encoding='utf-8') as file:
     allList = json.load(file)
 
+columns = ['Rank', 'Player', 'Country', 'Points']
+df = pd.DataFrame(allList, columns=columns)
+df['Rank'] = pd.to_numeric(df['Rank'])
+df['Points'] = pd.to_numeric(df['Points'])
+'''
+
+key = 'wtaMasterList'+ datetime.today().strftime('%Y-%m-%d') #change the string here to search for different document 
+raw = get_from_db(key)
+allList = raw['content']
 columns = ['Rank', 'Player', 'Country', 'Points']
 df = pd.DataFrame(allList, columns=columns)
 df['Rank'] = pd.to_numeric(df['Rank'])
@@ -95,7 +106,6 @@ for i in range(20):
     indexprep.append(x)
 
 comp_df = pd.DataFrame(comparison, columns=['top500', 'top100'], index=indexprep)
-
 comp_df.plot.barh(figsize=(20, 10), title='comparison of top 20 countries based on ranks in top 500 and top 100 WTA').invert_yaxis()
 
 # saving our work and displaying it
