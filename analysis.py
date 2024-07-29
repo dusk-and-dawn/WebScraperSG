@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('TkAgg') 
 import matplotlib.pyplot as plt
-from db import send_graph_to_db, get_from_db
+from db import send_graph_to_db, get_from_db, send_to_db
 from datetime import datetime
 
 '''
@@ -24,7 +24,7 @@ df['Rank'] = pd.to_numeric(df['Rank'])
 df['Points'] = pd.to_numeric(df['Points'])
 '''
 
-key = 'wtaMasterList'+ datetime.today().strftime('%Y-%m-%d') #change the string here to search for different document 
+key = 'wtaMasterList' #change the string here to search for different document 
 raw = get_from_db(key)
 allList = raw['content']
 columns = ['Rank', 'Player', 'Country', 'Points']
@@ -42,8 +42,10 @@ for i in df['Country']:
         hm[i] = 1
 
 countries_ranked = sorted(hm.items(), key=lambda x:x[1])[::-1]
+send_to_db('countries_ranked', countries_ranked)
 countries = [i[0] for i in countries_ranked]
 appearances = [i[1] for i in countries_ranked]
+
 
 #creating the first grafic
 
@@ -74,6 +76,7 @@ for index, country in enumerate(df['Country']):
             hm100[country] = 1
 
 countries100_ranked = sorted(hm100.items(), key=lambda x:x[1])[::-1]
+send_to_db('countries100_ranked', countries100_ranked)
 countries100 = [i[0] for i in countries100_ranked]
 appearances100 = [i[1] for i in countries100_ranked]
 

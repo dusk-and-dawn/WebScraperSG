@@ -7,4 +7,49 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" >
     <title>A Data Story</title>
 </head>
+<section class = "section">
+    <h1 class="title">Which country rules the WTA?</h1>
+    <h2 class = "subtitle">
+        We wanted to understand in which countries women's tennis is strong and how this has evolved during the past 10 years. 
+    </h2>
+</section>
+<section class = "section"> 
+    <div class="box">
+        The first piece of data that we want to show you, is a little graph that holds the top 20 nations in the WTA if one considers the current top 100 ranks.
+        You can see how many players each country currently has representing them in the WTA top 100 players. 
+    </div>
+    <div class = "container">
+        <img src="{{ url_for('return_graph', key='top20_wta100_countries_ranked_by_appearance2024-07-29')}}" alt="top 20 countries represented in WTA 500">
+    </div>
+    <div class="box">
+        You probably noticed that the top 5 spots are currently taken by:
+        <ul>
+            {% for spot in top5 %}
+            <li>{{ spot }}</li>
+            {% endfor %}
+        </ul>
+        At the time of writing, both the USA and Russia have a big lead over the rest of the world. For avid tennis fans this is hardly surprising. 
+    </div>
+</section>
+<br>
+<section class = "section">
+    <div class = "box">
+        Lets look at our second piece of data. Here we asked ourselves the same question, "Which country rules the WTA?" but we broadened the dataset. 
+        Now instead of looking only at the elite top 100, we widened it to the best 500 ranked players. 
+    </div>
+    <div class = "container">
+        <img src="{{ url_for('return_graph', key='top20_wta500_countries_ranked_by_appearance2024-07-29')}}" alt="top 20 countries represented in WTA 500">
+    </div>
+    <div class = "box">
+        Keen eyed readers probaby already spotted some fascinating differences. Let's look at the top 5 again:   
+    </div>
+    <ul>
+        {% for rank in top5_500 %}
+        <li>{{ rank }}</li>
+        {% endfor %}
+    </ul>
+    <div class = "box">
+        As one can see, Japan has made it all the way to top 4, beating China out of the top 5.
+    </div>
+</section>
 </html>

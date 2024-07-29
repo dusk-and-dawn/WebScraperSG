@@ -23,7 +23,8 @@ def send_to_db(key, content='test'):
 
 def get_from_db(key): 
     #return [t for t in tennis.find({"name" : key} )]
-    return tennis.find_one({'name':key})
+    name = key + datetime.today().strftime('%Y-%m-%d')
+    return tennis.find_one({'name':name})
 
 def send_graph_to_db(key):
     buffer = BytesIO()
@@ -38,6 +39,7 @@ def send_graph_to_db(key):
     tennis.insert_one(document)
 
 def return_graph(key):
+    #name = key + datetime.today().strftime('%Y-%m-%d')
     document = tennis.find_one({'name' : key})
     if document is None:
         return print('no doc found')
