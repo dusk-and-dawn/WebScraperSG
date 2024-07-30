@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" >
     <title>A Data Story</title>
+    <style>
+        .centered-list {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0;
+            align-items: center;
+        }
+        .centered-list li {
+            margin: 0 10px; 
+        }
+    </style>
 </head>
 <section class = "section">
     <h1 class="title">Which country rules the WTA?</h1>
@@ -21,13 +33,19 @@
     <div class = "container">
         <img src="{{ url_for('return_graph', key='top20_wta100_countries_ranked_by_appearance2024-07-29')}}" alt="top 20 countries represented in WTA 500">
     </div>
+    <br>
     <div class="box">
         You probably noticed that the top 5 spots are currently taken by:
-        <ul>
+    </div>
+    <div class="container">
+        <ul class="centered-list">
             {% for spot in top5 %}
             <li>{{ spot }}</li>
             {% endfor %}
         </ul>
+        <br>
+    </div>
+    <div class="box">
         At the time of writing, both the USA and Russia have a big lead over the rest of the world. For avid tennis fans this is hardly surprising. 
     </div>
 </section>
@@ -40,14 +58,16 @@
     <div class = "container">
         <img src="{{ url_for('return_graph', key='top20_wta500_countries_ranked_by_appearance2024-07-29')}}" alt="top 20 countries represented in WTA 500">
     </div>
+    <br>
     <div class = "box">
         Keen eyed readers probaby already spotted some fascinating differences. Let's look at the top 5 again:   
     </div>
-    <ul>
+    <ul class="centered-list">
         {% for rank in top5_500 %}
         <li>{{ rank }}</li>
         {% endfor %}
     </ul>
+    <br>
     <div class = "box">
         As one can see, Japan has made it all the way to top 4, beating China out of the top 5.
     </div>

@@ -9,20 +9,57 @@
 </head>
     <body>
     <section class="section">
+        <div class="container">
         <h1 class="title">
             A Data Story ... About Tennis!
         </h1>
         <h2 class = 'subtitle'>
             This story is all about exploring tennis by looking at data first.  
         </h2>
+        </div>
     </section>
     <section class="section">
+    <div class="container">
         <div class= "box">
             The first story we have to tell is about countries strength in the WTA over the years.
             You can check it out by pressing the button below. 
         </div> 
         <a class="button" href="{{ url_for('WTAcountries')}}">Which country rules the WTA?</a>
+    </div>
     </section>
 
     </body>
+<aside class="menu">
+    <p class="menu-label">Home</p>
+    <ul class="menu-list">
+        <li><a>landing page</a></li>
+        <li><a>about</a></li>
+        <li><a>contact</a></li>
+    </ul>
+    <p class="menu-label">data stories</p>
+    <ul class="menu-list"> 
+        <li><a href="{{ url_for('WTAcountries')}}">Who rules the WTA?</a></li>
+    </ul>
+</aside>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            This data story is made for edutainment purposes. Any mistakes or misrepresentation are accidental. 
+        </div>
+    </footer>
 </html>

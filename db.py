@@ -10,7 +10,7 @@ The basic databank setup
 
 client = MongoClient('localhost', 27017)
 db = client.tennisdb
-test = db.test
+test = db.test 
 tennis = db.tennis 
 
 '''

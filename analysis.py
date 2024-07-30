@@ -35,7 +35,6 @@ df['Points'] = pd.to_numeric(df['Points'])
 #preparation for grafics
 hm = {}
 for i in df['Country']:
-    pass
     if i in hm.keys():
         hm[i] += 1
     else:
