@@ -28,6 +28,7 @@ def main(url):
 
     # Perform smooth scrolling and scraping
     end_of_content_reached = False
+    
     while not end_of_content_reached:
         scrape_data(driver, player_list)
         scroll_by_pixels(driver, 700)
