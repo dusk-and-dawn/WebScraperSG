@@ -19,7 +19,7 @@ def return_graph(key):
         return 'No document found', 404
     image_binary = document['img']
     buffer = BytesIO(image_binary)
-    buffer.seek(0)|
+    buffer.seek(0)
     return send_file(buffer, mimetype='image/png')
 
 @app.route('/WTAcountries', methods=('POST', 'GET'))
