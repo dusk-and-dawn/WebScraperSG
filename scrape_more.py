@@ -93,3 +93,21 @@ def scraping_precise(link, table, subtable, rank_name, name_name, country_name, 
     driver.close()
     print(data)           
     return data
+
+def scraping_broad(link, table):
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    driver = webdriver.Chrome(options=options)
+    driver.get('https://www.google.com/')
+    print('network access success')
+    driver.get(link)
+    print('archive reached')
+    text_box = driver.find_element(by=By.CLASS_NAME, value=table)
+    stuff = text_box.text.split()
+    print(stuff)
+    data = stuff
+    
+    driver.close()
+    print(data)           
+    return data

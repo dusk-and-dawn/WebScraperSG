@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from db import send_to_db, get_from_db
 from datetime import datetime 
-from scrape_more import scraping_way_back, scraping_precise
+from scrape_more import scraping_way_back, scraping_precise, scraping_broad
 
 # 2015
 snapshots = [
@@ -41,7 +41,7 @@ def run15_16(list):
     for snapshot in list:
         fst = string_maker(snapshot)
         print(f'{counter} made a string: {fst}')
-        snd = scraping_precise(fst, 'layout-column-main', 'card', 'cell__content.h4', 'cell__section.main.cell__content.h4','cell__content.u-tDim', 'cell__section.u-pH12.u-tR.u-w72.cell__content')        
+        snd = scraping_broad(fst, 'layout-column-main')        
         print(f'scraped new snapshot {snapshot}')
         trd = send_to_db(snapshot, snd)
         print(f'{counter} sent it to the db {snd}')
@@ -74,6 +74,7 @@ def run20_21(list):
 '''
 CONTROL HUB
 '''
-#run15_16(snapshots)
-run17_19(simple_snapshots)
+run15_16(snapshots)
+#run17_19(simple_snapshots)
 #run20_21(['20200318145554'])
+
