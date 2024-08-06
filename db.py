@@ -56,6 +56,10 @@ def return_graph(key):
 def get_client():
     return db
 
+def show_names():
+    for document in tennis.find({}, {'_id':0, 'name':1}):
+        print(document.get('name'))
+
 '''
 Some useful test print statements for testing database connectivity
 '''
@@ -71,3 +75,6 @@ Some useful test print statements for testing database connectivity
 
 # print(datetime.today().strftime('%Y-%m-%d')) 
 # print([i for i in tennis.find({'name' : 'wtaMasterList2024-01-07/27/24'})])
+
+
+#show_names()
