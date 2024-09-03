@@ -56,6 +56,6 @@ def clean_up(list):
 
         data.append([rank, name, country, points])
     print(data)
+    return data
 
-
-clean_up(x['content'])
+#clean_up(x['content'])

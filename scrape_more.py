@@ -111,3 +111,5 @@ def scraping_broad(link, table):
     driver.close()
     print(data)           
     return data
+
+#scraping_broad()

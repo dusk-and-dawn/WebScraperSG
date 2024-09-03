@@ -21,7 +21,7 @@ def scrape_data(driver, player_list):
             if [rank, name, country, points] not in player_list:
                 player_list.append([rank, name, country, points])
 
-def main(url):
+def scrape_current_day(url):
     driver = setup_driver()
     open_website(driver, url)
     player_list = []
@@ -43,7 +43,7 @@ def main(url):
     
     send_to_db('wtaMasterList', player_list)
 
-main('https://www.sofascore.com/tennis/rankings/wta')
+# scrape_current_day('https://www.sofascore.com/tennis/rankings/wta')
 
 
 

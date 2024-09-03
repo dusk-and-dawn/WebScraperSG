@@ -5,8 +5,9 @@ from selenium.webdriver.chrome.options import Options
 from db import send_to_db, get_from_db
 from datetime import datetime 
 from scrape_more import scraping_way_back, scraping_precise, scraping_broad
+from test import clean_up
 
-# 2015
+# 2015 - 2016
 snapshots = [
     '20150213020035',
     '20150315063000', 
@@ -26,8 +27,8 @@ simple_snapshots = [
     '20170512121814',
     '20170613135845',
     '20170716073915',
-    '20170816010622',
-    '20171220140301'
+    '20170816010622' #,
+    #'20171220140301'
     ]
 
 # 2020
@@ -43,8 +44,10 @@ def run15_16(list):
         print(f'{counter} made a string: {fst}')
         snd = scraping_broad(fst, 'layout-column-main')        
         print(f'scraped new snapshot {snapshot}')
-        trd = send_to_db(snapshot, snd)
-        print(f'{counter} sent it to the db {snd}')
+        trd = clean_up(snd)
+        print(f'cleaned the data {trd}')
+        fth = send_to_db(snapshot, trd)
+        print(f'{counter} sent it to the db')
         counter += 1
     print('collected 2015 - 2016 snapshot data successfully')
 
@@ -71,10 +74,21 @@ def run20_21(list):
         print(f'{counter} sent it to the db {snd}')
         counter += 1
     print('collected 2020 - 2021 snapshot data successfully')
+
+def read_csv_to_db(name, path):
+    with open(path, 'r') as file:
+        data = file.readlines()
+
+    print(f'data: {data}')
+    send_to_db(name, data)
+    print('sent data to db')
+
 '''
 CONTROL HUB
 '''
 run15_16(snapshots)
 #run17_19(simple_snapshots)
 #run20_21(['20200318145554'])
+
+#read_csv_to_db()
 

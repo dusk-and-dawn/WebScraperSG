@@ -60,6 +60,10 @@ def show_names():
     for document in tennis.find({}, {'_id':0, 'name':1}):
         print(document.get('name'))
 
+def get_old_from_db(title, date):
+    name = title + date
+    return tennis.find_one({'name':name})
+
 '''
 Some useful test print statements for testing database connectivity
 '''
@@ -78,3 +82,4 @@ Some useful test print statements for testing database connectivity
 
 
 #show_names()
+#print(get_old_from_db('20150515144023', '2024-08-06'))
