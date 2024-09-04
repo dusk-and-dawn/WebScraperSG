@@ -40,8 +40,8 @@ def scrape_current_day(url):
 
     with open('wta500.json', 'w', -1, 'utf-8') as file:
         json.dump(player_list, file)
-    
-    send_to_db('wtaMasterList', player_list)
+    return player_list
+    #send_to_db('wtaMasterList', player_list)
 
 # scrape_current_day('https://www.sofascore.com/tennis/rankings/wta')
 

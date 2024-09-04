@@ -6,15 +6,16 @@ from db import send_to_db, get_from_db
 from datetime import datetime 
 from scrape_more import scraping_way_back, scraping_precise, scraping_broad
 from test import clean_up
+from scrape_all_approach import scrape_current_day
 
 # 2015 - 2016
 snapshots = [
-    #'20150213020035',
-    #'20150315063000', 
-    '20150415033839', 
-    '20150515144023',
-    '20150615082347',
-    '20150716072943',
+    #'20150213020035', here different format
+    #'20150315063000', same
+    #'20150415033839', 
+    #'20150515144023',
+    #'20150615082347',
+    #'20150716072943',
     '20150924003236',
     '20151025034147'
     ]
@@ -83,12 +84,20 @@ def read_csv_to_db(name, path):
     send_to_db(name, data)
     print('sent data to db')
 
+def scrape_current(): 
+    print('start current day scraping')
+    fst = scrape_current_day('https://www.sofascore.com/tennis/rankings/wta')
+    print(f'current day scraped {fst}')
+    send_to_db('wtaMasterList', fst)
+    print('sent current day data to db')
+
 '''
 CONTROL HUB
 '''
-run15_16(snapshots)
+#run15_16(snapshots)
 #run17_19(simple_snapshots)
 #run20_21(['20200318145554'])
+#scrape_current()
 
-#read_csv_to_db()
+#read_csv_to_db('population_data','/home/curiosity/Downloads/population-and-demography.csv')
 

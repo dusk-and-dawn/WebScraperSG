@@ -35,9 +35,12 @@ def clean_up(list):
                     if points < 50:
                         points = int(list[rank_index+6])
                 except:
-                    points = int(list[rank_index+6])
-                    if points < 50:
-                        points = int(list[rank_index+7])
+                    try:
+                        points = int(list[rank_index+6])
+                        if points < 50:
+                            points = int(list[rank_index+7])
+                    except:
+                        print('error during clean up, had to skip')
         else:
             
             rank = int(list[rank_index])
@@ -53,9 +56,17 @@ def clean_up(list):
                     if points < 50:
                         points = int(list[rank_index+6])
                 except:
-                    points = int(list[rank_index+6])
-                    if points < 50:
-                        points = int(list[rank_index+7])
+                    try: 
+                        points = int(list[rank_index+6])
+                        if points < 50:
+                            points = int(list[rank_index+7])
+                    except: 
+                        try: 
+                            points = int(list[rank_index+7])
+                            if points < 50:
+                                points = int(list[rank_index+8])
+                        except: 
+                            print('broken - skipped')
 
         data.append([rank, name, country, points])
     #print(data)
