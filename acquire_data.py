@@ -9,8 +9,8 @@ from test import clean_up
 
 # 2015 - 2016
 snapshots = [
-    '20150213020035',
-    '20150315063000', 
+    #'20150213020035',
+    #'20150315063000', 
     '20150415033839', 
     '20150515144023',
     '20150615082347',
@@ -42,7 +42,7 @@ def run15_16(list):
     for snapshot in list:
         fst = string_maker(snapshot)
         print(f'{counter} made a string: {fst}')
-        snd = scraping_broad(fst, 'layout-column-main')        
+        snd = scraping_broad(fst, 'js-list-filter-items')        
         print(f'scraped new snapshot {snapshot}')
         trd = clean_up(snd)
         print(f'cleaned the data {trd}')
