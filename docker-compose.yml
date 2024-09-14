@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - MONGO_URI=mongodb://mongo:27017/tennis
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:5.0
+    volumes:
+      - mongo-data:/data/db
+      - ./db-dump:/db-dump
+    command: >
+      bash -c "mongorestore --drop --dir=/db-dump/tennis && mongod --bind_ip 0.0.0.0"
+    ports:
+      - "27017:27017"
+volumes:
+  mongo-data: 

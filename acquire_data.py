@@ -99,5 +99,5 @@ CONTROL HUB
 #run20_21(['20200318145554'])
 #scrape_current()
 
-#read_csv_to_db('population_data','/home/curiosity/Downloads/population-and-demography.csv')
+#read_csv_to_db('population_data','/home/a_mind/Downloads/population-and-demography.csv')
 

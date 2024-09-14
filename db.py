@@ -8,7 +8,7 @@ import matplotlib.image as mpimg
 The basic databank setup
 '''
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongo', 27017)
 db = client.tennisdb
 test = db.test 
 tennis = db.tennis 
